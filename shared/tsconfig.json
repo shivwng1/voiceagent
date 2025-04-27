@@ -1,0 +1,18 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "target": "es6",
+    "module": "ESNext",
+    "strict": true,
+    "esModuleInterop": true,
+    "rootDir": "./",
+    "skipLibCheck": true,
+    "composite": true,
+    "forceConsistentCasingInFileNames": true,
+    "paths": {
+      "@/*": ["./*"]
+    }
+  },
+  "include": ["**/*.ts"],
+}

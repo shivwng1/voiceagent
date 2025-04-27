@@ -1,0 +1,2 @@
+export type TOpenaiRole = "user" | "system" | "assistant"
+export type TOpenaiStreamResponse = 'response.output_text.delta' | 'response.output_text.done' | 'response.content_part.done' | 'response.completed' | 'response.output_item.done'

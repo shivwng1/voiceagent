@@ -1,0 +1,27 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "module": "ESNext", 
+    "target": "ESNext", 
+    "moduleResolution": "Node",
+    "strict": true,
+    "esModuleInterop": true,
+    "outDir": "../dist/backend",
+    "rootDir": "./",
+    "skipLibCheck": true,
+    "composite": true,
+    "forceConsistentCasingInFileNames": true,
+    "types": ["node", "express"],
+    "paths": {
+      "@shared/*": ["../shared/*"],
+      "@/*": ["./*"]
+    }
+  },
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules", "dist"],
+  "references": [{ "path": "../shared" }],
+  "ts-node": {
+    "require": ["tsconfig-paths/register"]
+  }
+}
