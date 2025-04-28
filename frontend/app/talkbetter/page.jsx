@@ -7,7 +7,6 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { audioContext, base64ToArrayBuffer } from '@/utils/utils';
 import { AudioStreamer } from '@/services/audioStreamer';
 import VolMeterWorket from '@/services/workers/volMeter';
-import { waitingBase64 } from '@/constant/waiting';
 import { nanoid } from "nanoid";
 import { WavStreamPlayer } from "wavtools";
 
@@ -109,8 +108,6 @@ const App = () => {
   const [state, setState] = useState('Connection...');
   const mediaRecorderRef = useRef(null);
   const websocketRef = useRef();
-  // const soundBufferRef = useRef(null);
-  const audioStreamerRef = useRef(null);
   const router = useRouter();
   const streamRef = useRef(null);
   const [volume, setVolume] = useState(0);
@@ -140,7 +137,7 @@ const App = () => {
 
   const endCall = useCallback(() => {
     websocketRef.current?.close();
-    // soundBufferRef.current?.clearQueChunks();
+    wavStreamPlayerRef.current.interrupt();
     router.push('/');
   }, []);
 
@@ -153,7 +150,7 @@ const App = () => {
         user: {
           name: "Manan Rajpout",
         },
-        streamSid: "test"
+        streamSid: nanoid()
       }
     }
     websocketRef.current.send(JSON.stringify(data));
@@ -163,28 +160,10 @@ const App = () => {
 
 
   useEffect(() => {
-    if (!audioStreamerRef.current) {
-      audioContext({ id: "audio-out" }).then((audioCtx) => {
-        audioStreamerRef.current = new AudioStreamer(audioCtx, setIsAISpeaking);
-        audioStreamerRef.current
-          .addWorklet("vumeter-out", VolMeterWorket, (ev) => {
-            setVolume(ev.data.volume);
-          })
-          .then(() => {
-            console.log('successfully initialize')
-            // Successfully added worklet
-          });
-      });
-    }
-  }, [audioStreamerRef]);
-
-
-  useEffect(() => {
     if (websocketRef.current) return;
     audioRef.current = new Audio();
-    const ws = new WebSocket(process.env.NEXT_PUBLIC_MEDIA_SERVER_URL);
+    const ws = new WebSocket(`${process.env.NEXT_PUBLIC_MEDIA_SERVER_URL}?isWebCall=false`);
     websocketRef.current = ws;
-    // soundBufferRef.current = new RealTimeAudioPlayer(setIsAISpeaking);
     wavStreamPlayerRef.current.connect().then(() => {});
 
     ws.onopen = onConnect;
@@ -194,17 +173,12 @@ const App = () => {
         case 'media':
           console.log('media coming...');
           const base64Audio = data.media.payload;
-          // soundBufferRef.current.addAudioChunk(base64Audio);
-          // const buffer = base64ToArrayBuffer(base64Audio);
-          // audioStreamerRef.current?.addPCM16(new Uint8Array(buffer));
           const audio = Utils.base64ToArrayBuffer(base64Audio);
           const id = nanoid();
           wavStreamPlayerRef.current.add16BitPCM(audio, id);
           break;
         case 'clear':
           wavStreamPlayerRef.current.interrupt();
-          // audioStreamerRef.current?.stop();
-          // soundBufferRef.current.clearQueChunks();
           break;
         case 'state':
           const value = data.state.value;
