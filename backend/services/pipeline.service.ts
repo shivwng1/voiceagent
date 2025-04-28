@@ -1,11 +1,12 @@
 import { LLM } from "@shared/abstractions/LLM.abstraction";
 import { STT } from "@shared/abstractions/stt.abstraction";
 import TTS from "@shared/abstractions/TTS.abstraction";
-import { IAudioSend, ICallConfig, IClearAudio } from "@shared/interfaces/abstraction.interface";
+import { IAudioSend, ICallConfig, IClearAudio, IPipeEventMap } from "@shared/interfaces/abstraction.interface";
+import { EventEmitter } from "@shared/abstractions/event.abstraction";
 import { WebSocket } from "ws";
 
 
-export class Pipeline {
+export class Pipeline extends EventEmitter<IPipeEventMap> {
     protected STT: STT;
     protected LLM: LLM;
     protected TTS: TTS;
@@ -13,6 +14,7 @@ export class Pipeline {
 
     protected callConfig: ICallConfig;
     constructor(STT: STT, LLM: LLM, TTS: TTS, connection: WebSocket) {
+        super();
         if (!STT) throw new Error("STT is not initialized.");
         if (!LLM) throw new Error("LLM is not initialized.");
         if (!TTS) throw new Error("TTS is not initialized.");
@@ -28,23 +30,32 @@ export class Pipeline {
         this.TTS.connect();
 
         this.callConfig = {
-            isSpeaking: false,
+            isSpeaking: true,
             isIntrupt: false
         }
 
         //STT Events listners
         this.STT.on("transcript", (transcription) => {
+            if (this.callConfig.isSpeaking == false) this.callConfig.isSpeaking = true;
             this.LLM.send(transcription);
+            this.emit("transcript",transcription);
         });
 
         this.STT.on("intrupt", () => {
-            this.clear();
-            console.log("Intruption handle");
+            if (this.callConfig.isSpeaking == true) {
+                this.clear();
+
+                this.callConfig.isSpeaking = false;
+                this.TTS.clear();
+                this.emit('intrupt','');
+            }
         });
 
         //LLM Events listners
         this.LLM.on("delta", (delta) => {
-            this.TTS.sendDelta(delta);
+            if(this.callConfig.isSpeaking == true){
+                this.TTS.sendDelta(delta);
+            }
         });
 
         this.LLM.on("final", () => {
@@ -52,14 +63,17 @@ export class Pipeline {
         });
 
         this.LLM.on("response", (response) => {
-            console.log(`BOT: ${response}`)
+            this.emit('assistant',response);
         });
 
         //TSS Events handle
         this.TTS.on('audio', (pcmaudio) => {
-            this.sendAudio(pcmaudio);
-        })
-        this.TTS.sendText("Hello my name is rahul.")
+            if(this.callConfig.isSpeaking == true){
+                this.sendAudio(pcmaudio);
+            }
+        });
+
+        this.TTS.sendText("Hello, this is Dr. AI, how can I help you today?")
 
         //call events
         connection.onmessage = async (message) => {
@@ -104,4 +118,11 @@ export class Pipeline {
         }
         this.connection.send(JSON.stringify(meesage))
     }
+
+
+    static readonly EVENTS = {
+        TRANSCRIPT: "transcript",
+        INTRUPT: "intrupt",
+        assistant: "assistant",
+    } as const;
 }

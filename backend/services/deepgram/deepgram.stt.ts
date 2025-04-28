@@ -29,10 +29,10 @@ export class DeepgramSTT extends STT {
       multichannel: "false",
       no_delay: "true",
       interim_results: "true",
+      endpointing:"300"
     });
 
     if(this.config.encoding) queryParams.append('encoding',this.config.encoding);
-
     this.socket = new WebSocket(`wss://api.deepgram.com/v1/listen?${queryParams.toString()}`, [
       "token",
       process.env.DEEPGRAM_API_KEY as string,
@@ -50,14 +50,14 @@ export class DeepgramSTT extends STT {
 
       const transcript = received.channel.alternatives[0]?.transcript;
       if (transcript) {
-        //@ts-ignore
-        this.emit(STT.EVENTS.INTRUPT,{})
+        this.text += transcript
+        this.emit(STT.EVENTS.INTRUPT,'')
         console.log("Interrupt detected");
       }
 
-      if (transcript && received.is_final) {
-        //@ts-ignore
-        this.emit(STT.EVENTS.TRANSCRIPT, transcript);
+      if (transcript && received.speech_final) {
+        this.emit(STT.EVENTS.TRANSCRIPT, this.text);
+        this.text = '';
       }
     };
 

@@ -35,7 +35,7 @@ export class OpenAiLLM extends LLM {
 
         const stream = await this.openaiClient.responses.create({
             stream: this.config.stream,
-            model: this.config.model || "gpt-3.5-turbo",
+            model: this.config.model || "gpt-4o",
             input: this.chatContext
         })
 

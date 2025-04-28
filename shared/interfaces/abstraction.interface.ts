@@ -35,6 +35,11 @@ export interface ILLMEventMap {
   response: string;
   final: string;
 }
+export interface IPipeEventMap {
+  transcript: string;
+  intrupt: string;
+  assistant: string;
+}
 
 export interface ITTSEvents {
   audio: (audio: string) => void;

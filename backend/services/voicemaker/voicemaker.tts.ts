@@ -5,6 +5,8 @@ import { ChunkedSentenceStream } from "@shared/abstractions/sentence.abstranctio
 
 export default class VoiceMakerTTS extends TTS {
     protected chunksSentenceStream: ChunkedSentenceStream;
+    protected bufferSentences: string[] = []
+    protected generatingAudio: boolean = false;
     constructor(config: ITTSConfig) {
         if (!config.apiKey) throw new Error("VoiceMaker API key missing.");
         super(config);
@@ -57,7 +59,20 @@ export default class VoiceMakerTTS extends TTS {
     }
 
     sendText(text: string): void {
-        this.getAudio(text);
+        this.bufferSentences.push(text);
+        if(this.generatingAudio == false){
+            this.generatingAudio = true;
+            this.QuePusher();
+        }
+    }
+
+    async QuePusher():Promise<void> {
+        while (this.bufferSentences.length != 0){
+            const sentence = this.bufferSentences.shift();
+            await this.getAudio(sentence as string)
+        }
+
+        this.generatingAudio = false;
     }
 
     sendDelta(delta: string, isFinal: boolean = false): void {
@@ -66,5 +81,10 @@ export default class VoiceMakerTTS extends TTS {
 
     flush(): void {
         this.sendDelta('', true);
+    }
+    clear(): void {
+        this.chunksSentenceStream.clear();
+        this.bufferSentences = [];
+        this.generatingAudio = false;
     }
 }
