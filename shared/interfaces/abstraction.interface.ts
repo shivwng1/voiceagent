@@ -70,6 +70,7 @@ export interface ITTSConfig {
   temprature?: number;
   apiKey: string;
   pitch?: number;
+  isWebCall?: boolean;
 }
 
 

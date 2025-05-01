@@ -116,9 +116,16 @@ const App = () => {
   const audioRef = useRef(null)
   const timeoutRef = useRef();
   const wavStreamPlayerRef = new useRef(new WavStreamPlayer({ sampleRate: 16000 }));
+  const noiseProcessor = useRef(null);
 
+  useEffect(() => {
+    async function loadNoiseSuppressor() {
+      const module = await import("@videosdk.live/videosdk-media-processor-web");
+      noiseProcessor.current = new module.VideoSDKNoiseSuppressor();
+    }
 
-
+    loadNoiseSuppressor();
+  }, []);
 
   const toggleMute = useCallback(() => {
     if (streamRef.current) {
@@ -162,7 +169,7 @@ const App = () => {
   useEffect(() => {
     if (websocketRef.current) return;
     audioRef.current = new Audio();
-    const ws = new WebSocket(`${process.env.NEXT_PUBLIC_MEDIA_SERVER_URL}?isWebCall=false`);
+    const ws = new WebSocket(`${process.env.NEXT_PUBLIC_MEDIA_SERVER_URL}/media-stream/web?isWebCall=false`);
     websocketRef.current = ws;
     wavStreamPlayerRef.current.connect().then(() => {});
 
@@ -212,7 +219,11 @@ const App = () => {
       }
     });
 
-    mediaRecorderRef.current = new MediaRecorder(streamRef.current);
+    const processedStream = await noiseProcessor.current.getNoiseSuppressedAudioStream(
+      streamRef.current
+    );
+
+    mediaRecorderRef.current = new MediaRecorder(processedStream);
     mediaRecorderRef.current.ondataavailable = async (event) => {
 
       if (websocketRef.current && websocketRef.current.readyState === WebSocket.OPEN) {

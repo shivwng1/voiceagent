@@ -34,7 +34,7 @@ export default class SarvamTTS extends TTS {
                 pitch: this.config.pitch || 0,
                 pace: this.config.speed || 1,
                 loudness: this.config.loadness || 1.2,
-                speech_sample_rate: 16000,
+                speech_sample_rate: this.config.isWebCall ? 16000 : 8000,
                 enable_preprocessing: true,
                 model: "bulbul:v1",
             }),
@@ -53,6 +53,9 @@ export default class SarvamTTS extends TTS {
             const wavBuffer = Buffer.from(base64, "base64");
             const wavFile = new wav.WaveFile(new Uint8Array(wavBuffer));
 
+            if(!this.config.isWebCall){
+                wavFile.toMuLaw()
+            }
             // @ts-ignore
             const pcmSamples = wavFile.data.samples;
             const pcmBase64 = Buffer.from(pcmSamples).toString("base64");

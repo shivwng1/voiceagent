@@ -34,7 +34,7 @@ export default class VoiceMakerTTS extends TTS {
                 Text: text,
                 OutputFormat: "wav",
                 ResponseType: "stream",
-                SampleRate: 16000,
+                SampleRate: this.config.isWebCall ? 16000 : 8000,
                 Effect: "default",
                 MasterVolume: this.config.loadness || 0,
                 MasterSpeed: this.config.speed || 0,
@@ -48,6 +48,9 @@ export default class VoiceMakerTTS extends TTS {
 
             const wavFile = new wav.WaveFile(new Uint8Array(wavBuffer));
 
+            if(!this.config.isWebCall){
+                wavFile.toMuLaw()
+            }
             // @ts-ignore
             const pcmSamples = wavFile.data.samples;
             const pcmBase64 = Buffer.from(pcmSamples).toString("base64");

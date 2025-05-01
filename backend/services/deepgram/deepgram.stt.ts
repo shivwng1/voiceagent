@@ -4,6 +4,7 @@ import WebSocket from "ws";
 import { Buffer } from "node:buffer";
 import { STT } from "@shared/abstractions/stt.abstraction";
 
+
 export class DeepgramSTT extends STT {
   private socket?: WebSocket;
   private text: string = '';
