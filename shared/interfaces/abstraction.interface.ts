@@ -15,6 +15,7 @@ export interface ILLMConfig {
   stream?: boolean;
   apiKey?: string;
   prompt?: string;
+  base_url?: string;
 }
 
 export interface ISTTResult {
@@ -94,4 +95,13 @@ export interface IAudioSend {
 export interface IClearAudio {
   event: TCallEvent,
   streamSid: string
+}
+
+export interface INoiseReducerOptions {
+  sampleRate?: number;
+  channels?: number;
+  inputFormat?: string;
+  outputFormat?: string;
+  model?: string;
+  modelPath?: string;
 }

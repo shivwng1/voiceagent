@@ -11,6 +11,7 @@ import VoiceMakerTTS from "@/services/voicemaker/voicemaker.tts";
 import TWILIOService from "./services/twilio.service";
 import cors from 'cors'
 import { TCallType } from "@shared/types/call.types";
+import { OpenRouterLLM } from "./services/openrouter/openrouter.llm";
 
 const PORT = process.env.PORT || 4000;
 const twilio = new TWILIOService();
@@ -79,11 +80,20 @@ app.ws("/media-stream/:call_type", (ws: WebSocket, req: Request) => {
   
     
     const STT = new DeepgramSTT({ model: 'nova-3', language: 'multi',encoding: !isWebCall ? "mulaw" : undefined });
-    const LLM = new OpenAiLLM({ apiKey: process.env.OPENAI_API_KEY, prompt: system_prompt, model: 'gpt-4o' });
-    const TTS = new VoiceMakerTTS({ apiKey: process.env.VOICEMAKER_API_KEY as string, language: 'hi-IN', voice_id: 'proplus-Nishant', speed: 10, loadness: 10,isWebCall })
-    // const TTS = new SarvamTTS({ apiKey: process.env.SARVAM_API_KEY as string, voice_id: 'diya',isWebCall })
+    // const LLM = new OpenAiLLM({ apiKey: process.env.OPENAI_API_KEY, prompt: system_prompt, model: 'gpt-4o' });
 
-    const pipeline = new Pipeline(STT, LLM, TTS, ws);
+    const LLM = new OpenRouterLLM({
+      apiKey: process.env.OPEN_ROUTER_END,
+      prompt: system_prompt,
+      model: "openai/gpt-4.1-nano",
+      temperature: 0.7,
+      stream: true
+    });
+
+    // const TTS = new VoiceMakerTTS({ apiKey: process.env.VOICEMAKER_API_KEY as string, language: 'hi-IN', voice_id: 'proplus-Nishant', speed: 10, loadness: 10,isWebCall })
+    const TTS = new SarvamTTS({ apiKey: process.env.SARVAM_API_KEY as string, voice_id: 'manisha', isWebCall })
+
+    const pipeline = new Pipeline(STT, LLM, TTS, ws,isWebCall);
     pipeline.on('transcript', (transcript) => {
       console.log(`@User ---> ${transcript}`);
     });

@@ -36,7 +36,7 @@ export default class SarvamTTS extends TTS {
                 loudness: this.config.loadness || 1.2,
                 speech_sample_rate: this.config.isWebCall ? 16000 : 8000,
                 enable_preprocessing: true,
-                model: "bulbul:v1",
+                model: "bulbul:v2",
             }),
         });
 

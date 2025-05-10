@@ -215,7 +215,7 @@ const App = () => {
 
     streamRef.current = await navigator.mediaDevices.getUserMedia({
       audio: {
-        sampleRate: 8000
+        sampleRate: 8000,
       }
     });
 

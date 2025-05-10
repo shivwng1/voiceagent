@@ -5,7 +5,7 @@ import { OpenAI } from "openai";
 
 export class OpenAiLLM extends LLM {
     protected config: ILLMConfig;
-    protected chatContext: IChatContext[];
+    public chatContext: IChatContext[];
     protected openaiClient: OpenAI;
 
     constructor(config: ILLMConfig) {

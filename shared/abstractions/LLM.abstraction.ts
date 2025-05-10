@@ -5,7 +5,7 @@ import {ISTTConfig,ISTTResult,ISTTEventMap, ILLMConfig,IChatContext, ILLMEventMa
 export abstract class LLM extends EventEmitter<ILLMEventMap> {
   protected config: ILLMConfig;
   protected isConnected: boolean = false;
-  protected chatContext: IChatContext[] = [];
+  public chatContext: IChatContext[] = [];
 
   constructor(config: ISTTConfig = {}) {
     super();

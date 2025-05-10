@@ -11,23 +11,28 @@ export class Pipeline extends EventEmitter<IPipeEventMap> {
     protected LLM: LLM;
     protected TTS: TTS;
     protected connection: WebSocket;
+    protected isWebCall: boolean;
 
     protected callConfig: ICallConfig;
-    constructor(STT: STT, LLM: LLM, TTS: TTS, connection: WebSocket) {
+    constructor(STT: STT, LLM: LLM, TTS: TTS, connection: WebSocket,isWebCall: boolean) {
         super();
         if (!STT) throw new Error("STT is not initialized.");
         if (!LLM) throw new Error("LLM is not initialized.");
         if (!TTS) throw new Error("TTS is not initialized.");
 
-
+        this.isWebCall = isWebCall;
         this.STT = STT;
         this.LLM = LLM;
         this.TTS = TTS;
+       
+
         this.connection = connection;
 
         this.STT.connect();
         this.LLM.connect();
         this.TTS.connect();
+
+        
 
         this.callConfig = {
             isSpeaking: true,
@@ -73,8 +78,15 @@ export class Pipeline extends EventEmitter<IPipeEventMap> {
             }
         });
 
-        this.TTS.sendText("Hello, this is Dr. AI, how can I help you today?")
-
+        this.LLM.chatContext.push({
+             role: "assistant",
+            content: "Hello I am Rahul."
+        })
+        
+        this.TTS.sendText("Hello I am Rahul.")
+        
+        
+        const chunks: Buffer[] = [];
         //call events
         connection.onmessage = async (message) => {
             try {
@@ -85,8 +97,10 @@ export class Pipeline extends EventEmitter<IPipeEventMap> {
                         console.log('Starting transcription...');
                         this.callConfig.streamSid = data?.start?.streamSid
                         break;
+
                     case 'media':
-                        this.STT.send(data.media.payload);
+                        const payload = data.media.payload;
+                        this.STT.send(payload);
                         break;
                 }
             } catch (error) {
