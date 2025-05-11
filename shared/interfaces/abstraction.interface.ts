@@ -40,11 +40,14 @@ export interface IPipeEventMap {
   transcript: string;
   intrupt: string;
   assistant: string;
+  endCall: string;
+  connectionClose: string;
 }
 
 export interface ITTSEvents {
   audio: (audio: string) => void;
   close: (error: Error | null) => void;
+  characters: (charCount: number) => void;
 }
 
 
@@ -81,6 +84,8 @@ export interface ICallConfig {
   isSpeaking?: boolean;
   isIntrupt?: boolean;
   streamSid?: string;
+  customGreeting?: boolean;
+  endingCall?: boolean;
 }
 
 

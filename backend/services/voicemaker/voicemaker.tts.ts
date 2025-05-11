@@ -62,6 +62,7 @@ export default class VoiceMakerTTS extends TTS {
     }
 
     sendText(text: string): void {
+        this.emit("characters", text.length);
         this.bufferSentences.push(text);
         if(this.generatingAudio == false){
             this.generatingAudio = true;

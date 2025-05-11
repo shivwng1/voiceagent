@@ -169,7 +169,7 @@ const App = () => {
   useEffect(() => {
     if (websocketRef.current) return;
     audioRef.current = new Audio();
-    const ws = new WebSocket(`${process.env.NEXT_PUBLIC_MEDIA_SERVER_URL}/media-stream/web?isWebCall=false`);
+    const ws = new WebSocket(`${process.env.NEXT_PUBLIC_MEDIA_SERVER_URL}/media-stream/web/webcall`);
     websocketRef.current = ws;
     wavStreamPlayerRef.current.connect().then(() => {});
 

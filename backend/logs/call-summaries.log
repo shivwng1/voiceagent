@@ -1,0 +1,273 @@
+# Call Summaries Log
+
+
+# Call #1 (12/05/2025 07:03:19 IST)
+
+## Call Details
+- **Type:** Inbound
+- **Duration:** 0:34
+- **UTC Timestamp:** 2025-05-11T20:03:19.519Z
+- **Voice ID:** proplus-Anaya
+
+## AI Summary
+- Outcome: undecided
+- Key Points: 
+  - User initiated conversation asking if the AI can hear them.
+  - User expressed a desire to know about the AI's offerings, specifically credit card options.
+  - AI provided information about various credit card benefits, including cashback, rewards, travel perks, and low interest rates.
+- Next Steps: AI asked the user if they would like to learn about popular cards or if they have specific features in mind.
+
+## Complete Conversation Transcript
+**USER:** Hello. Can you hear me?Hello. Can you hear me?Hello. Can you hear me?Hello. Can you hear me?Hello. Can you hear me?
+
+**AI:** Hello! Yes, I can hear you clearly. How can I assist you today? Are you interested in learning about our credit card options?
+
+**USER:** वैसे किBasically, I wantBasically, I want to know about yourBasically, I want to know about yourself.
+
+**AI:** Certainly! I’m here to help you find the best credit card options to suit your needs. We offer a variety of credit cards with different benefits, such as cashback, rewards, travel perks, and low interest rates. 
+
+Would you like to know about our most popular cards, or do you have specific features you're interested in?
+
+> **SYSTEM EVENT:** CALL_STARTED
+
+> **SYSTEM EVENT:** INTERRUPTION_DETECTED
+
+> **SYSTEM EVENT:** INTERRUPTION_DETECTED
+
+> **SYSTEM EVENT:** CALL_ENDED
+
+
+
+## Technical Details
+
+### Speech-to-Text (STT)
+- **Audio Duration:** 18.5 seconds
+- **Characters Recognized:** 216
+- **Model:** nova-3
+
+### Text-to-Speech (TTS)
+- **Characters Spoken:** 437
+- **API Requests:** 8
+- **Voice Used:** proplus-Anaya
+
+### LLM Processing
+- **Input Characters:** 216
+- **Output Characters:** 445
+- **Total Characters:** 661
+
+### Summary Generation
+- **Input Characters:** 298
+- **Output Characters:** 113
+- **Total Characters:** 411
+
+### Overall Usage
+- **Combined Character Usage:** 1072
+
+---
+
+
+# Call #2 (12/05/2025 07:05:50 IST)
+
+## Call Details
+- **Type:** Outbound
+- **Duration:** 1:59
+- **UTC Timestamp:** 2025-05-11T20:05:50.709Z
+- **Voice ID:** proplus-Anaya
+
+## AI Summary
+- Outcome: Interested
+- Key Points:
+  - Customer expressed interest in the GEN AI course and upskilling in related fields.
+  - Customer is currently pursuing an M.Tech from IIT.
+  - Customer has a strong background in mathematics and has experience with algorithms and science projects.
+  - Discussed eligibility criteria related to STEM degrees.
+- Next Steps: The AI will likely continue assessing the customer's programming readiness and provide further information about the course.
+
+## Complete Conversation Transcript
+**USER:** Hello. Can you hearHello? Can you hear me?
+
+**AI:** मैं IIT रुड़की से राहुल बोल रहा हूं। आपने Instagram पर GEN AI course के बारे में एक form भरा था। क्या अभी बात करने के लिए free हैं?
+
+**USER:** मैं फिरहां, मैं फिर ही हूं.
+
+**AI:** अच्छा, तो आप अभी बात कर रहे हैं। क्या आप GEN AI, Agentic AI, और ML applications में upskilling में interested हैं?
+
+**USER:** I'mहां, मैं interested हूं.
+
+**AI:** Great! तो चलिए, मैं आपके eligibility के बारे में कुछ questions पूछता हूं। सबसे पहले, आपकी highest qualification क्या है? जैसे, आपने कौन सी degree complete की है?
+
+**USER:** IIIT में जाने के लिएIIT में जाने के लिए शायद मुझेIIT में जाने के लिए शायद मुझे JEE means औरIIT में जानने के लिए शायद मुझे JEE means और advanceदेनेकी exam देने पड़ते हैं बस
+
+**AI:** समझ गया, लेकिन इस course के लिए जरूरी है कि आपकी qualification में कोई STEM degree हो जैसे B.Tech, M.Tech, B.Sc, M.Sc, BCA, MCA या similar। तो क्या आपकी qualification इन में से कोई है?
+
+**USER:** Currently, I am doingCurrently, I am doing m tenCurrently, I am doing m tech from IITCurrently, I am doing MTech from IIT
+
+**USER:** Harpur.
+
+**AI:** बढ़िया! तो आपकी degree M.Tech है और IIT से है। अब, आपके percentage क्या था?
+
+**AI:** बढ़िया! तो आप M.Tech कर रहे हैं IIT से। इसके अलावा, आपका percentage क्या था? 그리고, programming और mathematics में आप कितने comfortable हैं?
+
+**USER:** Basically, meetingBasically मेरी math जो है वह काफीBasically,मेरी math जो है वह काफीमेरी math जो है वह काफी strong है और मैंनेमेरी math जो है वह काफी strong है और मैंने खुद के algorithmमेरी math जो है वह काफी strong है और मैंने खुद के algorithms भी लिखे हुए हैं.मेरी math जो है वह काफी strong है और मैंने खुद के algorithms भी लिखे हुए हैं.Science beऔर science भी मेरी ठीक हैऔर science भी मेरी ठीक है project और वगैरहसब कुछ.
+
+**AI:** बहुत अच्छा! तो आपकी mathematics और algorithms दोनों ही काफी strong हैं, और sciences में भी अच्छा अनुभव है। इस आधार पर, क्या आप comfortable हैं कि आप programming सीखने के लिए तैयार हैं? या फिर, आप अभी से सीखने के लिए willing हैं?
+
+> **SYSTEM EVENT:** CALL_STARTED
+
+> **SYSTEM EVENT:** INTERRUPTION_DETECTED
+
+> **SYSTEM EVENT:** INTERRUPTION_DETECTED
+
+> **SYSTEM EVENT:** INTERRUPTION_DETECTED
+
+> **SYSTEM EVENT:** INTERRUPTION_DETECTED
+
+> **SYSTEM EVENT:** INTERRUPTION_DETECTED
+
+> **SYSTEM EVENT:** INTERRUPTION_DETECTED
+
+> **SYSTEM EVENT:** INTERRUPTION_DETECTED
+
+> **SYSTEM EVENT:** CALL_ENDED
+
+
+
+## Technical Details
+
+### Speech-to-Text (STT)
+- **Audio Duration:** 61.2 seconds
+- **Characters Recognized:** 817
+- **Model:** nova-3
+
+### Text-to-Speech (TTS)
+- **Characters Spoken:** 1019
+- **API Requests:** 29
+- **Voice Used:** proplus-Anaya
+
+### LLM Processing
+- **Input Characters:** 817
+- **Output Characters:** 1031
+- **Total Characters:** 1848
+
+### Summary Generation
+- **Input Characters:** 610
+- **Output Characters:** 122
+- **Total Characters:** 732
+
+### Overall Usage
+- **Combined Character Usage:** 2580
+
+---
+
+
+# Call #3 (12/05/2025 07:06:10 IST)
+
+## Call Details
+- **Type:** Inbound
+- **Duration:** 0:16
+- **UTC Timestamp:** 2025-05-11T20:06:10.703Z
+- **Voice ID:** proplus-Maya2
+
+## AI Summary
+- Outcome: undecided
+- Key Points: 
+  - USER initiated the conversation in Hindi, indicating a preference for communication in their native language.
+  - AI confirmed it can assist and inquired about the customer's needs, specifically regarding credit card information or special offers.
+- Next Steps: Awaiting USER's response to specify their interest in credit card information or offers.
+
+## Complete Conversation Transcript
+**USER:** Hello क्या तुमHello क्या तुम मुझे sun रहे हो?
+
+**AI:** नमस्ते! हाँ, मैं आपकी बात सुन रहा हूँ। कैसे मदद कर सकता हूँ मैं आपको आज? यदि आप क्रेडिट कार्ड के बारे में जानकारी चाहते हैं या कोई विशेष ऑफर जानना चाहते हैं, तो कृपया बताइए।
+
+> **SYSTEM EVENT:** CALL_STARTED
+
+> **SYSTEM EVENT:** INTERRUPTION_DETECTED
+
+> **SYSTEM EVENT:** CALL_ENDED
+
+
+
+## Technical Details
+
+### Speech-to-Text (STT)
+- **Audio Duration:** 9.4 seconds
+- **Characters Recognized:** 45
+- **Model:** nova-3
+
+### Text-to-Speech (TTS)
+- **Characters Spoken:** 170
+- **API Requests:** 4
+- **Voice Used:** proplus-Maya2
+
+### LLM Processing
+- **Input Characters:** 45
+- **Output Characters:** 173
+- **Total Characters:** 218
+
+### Summary Generation
+- **Input Characters:** 184
+- **Output Characters:** 98
+- **Total Characters:** 282
+
+### Overall Usage
+- **Combined Character Usage:** 500
+
+---
+
+
+# Call #4 (12/05/2025 07:07:43 IST)
+
+## Call Details
+- **Type:** Inbound
+- **Duration:** 0:21
+- **UTC Timestamp:** 2025-05-11T20:07:43.457Z
+- **Voice ID:** proplus-AdityaSharma
+
+## AI Summary
+- Outcome: Interested
+- Key Points: 
+  - User is reaching out to inquire about credit card options.
+  - AI confirms the ability to assist.
+- Next Steps: AI will provide information on available credit card options.
+
+## Complete Conversation Transcript
+**USER:** Can you hear me?Can you hear me?
+
+**AI:** Yes, I can hear you! How can I assist you today with our credit card options?
+
+> **SYSTEM EVENT:** CALL_STARTED
+
+> **SYSTEM EVENT:** INTERRUPTION_DETECTED
+
+> **SYSTEM EVENT:** CALL_ENDED
+
+
+
+## Technical Details
+
+### Speech-to-Text (STT)
+- **Audio Duration:** 11.5 seconds
+- **Characters Recognized:** 32
+- **Model:** nova-3
+
+### Text-to-Speech (TTS)
+- **Characters Spoken:** 81
+- **API Requests:** 3
+- **Voice Used:** proplus-AdityaSharma
+
+### LLM Processing
+- **Input Characters:** 32
+- **Output Characters:** 77
+- **Total Characters:** 109
+
+### Summary Generation
+- **Input Characters:** 157
+- **Output Characters:** 54
+- **Total Characters:** 211
+
+### Overall Usage
+- **Combined Character Usage:** 320
+
+---
+

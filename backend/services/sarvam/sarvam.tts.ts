@@ -68,6 +68,7 @@ export default class SarvamTTS extends TTS {
 
     sendText(text: string): void {
         this.bufferSentences.push(text);
+        this.emit("characters", text.length);
         if(this.generatingAudio == false){
             this.generatingAudio = true;
             this.QuePusher();
